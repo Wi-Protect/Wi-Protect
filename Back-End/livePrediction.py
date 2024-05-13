@@ -55,7 +55,7 @@ DAY_TIME = 1
 
 mode = NIGHT_TIME
 
-lastQueue = [0, 0, 0, 0, 0, 0, 0]
+lastQueue = [0, 0, 0, 0, 0]
 
 
 def csi_data_read_parse():
@@ -121,8 +121,6 @@ def csi_data_read_parse():
         amplitudes = []
         phases = []
 
-        # print(csi_raw_data[0])
-
         for i in range(len(csi_raw_data1)):
             if i % 2 == 0:
                 imaginary1.append(csi_raw_data1[i])
@@ -144,11 +142,8 @@ def csi_data_read_parse():
             amplitudes.append(sqrt(imaginary2[i] ** 2 + real2[i] ** 2))
             phases.append(atan2(imaginary2[i], real2[i]))
 
-        # print([csi_data[1]] + amplitudes+phases)
-        # csi_list.append([csi_data[1]] + amplitudes+phases)
 
         # Get current date and time
-
         now = datetime.datetime.now()
 
         if count == 0:
@@ -214,7 +209,7 @@ def get25(group):
 
 def addLastQueue(data):
     global lastQueue
-    if len(lastQueue) == 7:
+    if len(lastQueue) == 5:
         lastQueue.pop(0)
     lastQueue.append(data)
 
